@@ -3,18 +3,22 @@ package com.example.bookmestore.service;
 import com.example.bookmestore.dto.BookDTO;
 import com.example.bookmestore.models.Book;
 import com.example.bookmestore.repository.BookRepository;
+import com.example.bookmestore.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.bookmestore.models.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
-
+    @Autowired
+    private SellerRepository sellerRepository;
     public List<BookDTO> findAllBooks() {
         List<Book> books = bookRepository.findAll();
         List<BookDTO> bookDTOs = new ArrayList<>();
@@ -40,7 +44,7 @@ public class BookService {
         bookDTO.setAuthor(book.getAuthor());
         bookDTO.setPageCount(book.getPageCount());
         bookDTO.setPublisher(book.getPublisher());
-//        bookDTO.setCondition(book.getCondition().toString());
+        bookDTO.setCondition(book.getCondition().toString());
         bookDTO.setPrice(book.getPrice());
         bookDTO.setShippingFee(book.getShippingFee());
         return bookDTO;
@@ -57,4 +61,13 @@ public class BookService {
         return bookDTOs;
     }
 
+    public Book listBook(Book book, String sellerEmail) {
+        Optional<Seller> sellerOpt = sellerRepository.findByEmail(sellerEmail);
+        if (sellerOpt.isPresent() && sellerOpt.get().isApproved()) {
+            // The seller is approved, proceed with listing the book
+            return bookRepository.save(book);
+        } else {
+            throw new IllegalStateException("Seller is not approved or does not exist.");
+        }
+    }
 }

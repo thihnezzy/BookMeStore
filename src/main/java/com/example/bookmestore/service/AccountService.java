@@ -51,4 +51,18 @@ public class AccountService {
         }
         return account;
     }
+    public BaseAccount createAccount(String name, String email, String password, String phone, Role role) {
+        BaseAccount account = switch (role) {
+            case ADMIN -> new Admin();
+            case SELLER -> new Seller();
+            case USER -> new User();
+        };
+
+        account.setName(name);
+        account.setEmail(email);
+        account.setPassword(password);
+        account.setPhone(phone);
+
+        return accountRepository.save(account);
+    }
 }
