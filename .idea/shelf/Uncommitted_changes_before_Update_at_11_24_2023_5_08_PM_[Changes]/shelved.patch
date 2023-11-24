@@ -1,0 +1,103 @@
+Index: src/main/java/com/example/bookmestore/controller/BookController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bookmestore.controller;\r\n\r\nimport com.example.bookmestore.dto.BookDTO;\r\nimport com.example.bookmestore.service.BookService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.GetMapping;\r\nimport org.springframework.web.bind.annotation.PathVariable;\r\nimport org.springframework.web.bind.annotation.RequestMapping;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\nimport java.awt.print.Book;\r\nimport java.util.List;\r\n\r\n@RestController\r\n@RequestMapping(\"/api/books\")\r\npublic class BookController {\r\n    @Autowired\r\n    private BookService bookService;\r\n\r\n    @GetMapping\r\n    public ResponseEntity<List<BookDTO>> getAllBooks() {\r\n        System.out.println(\"Get all books\");\r\n        return ResponseEntity.ok(bookService.findAllBooks());\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public ResponseEntity<BookDTO> getBookById(@PathVariable Long id) {\r\n        BookDTO bookDTO = bookService.findBookById(id);\r\n        return bookDTO != null ? ResponseEntity.ok(bookDTO) : ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @GetMapping(\"/search/{keyword}\")\r\n    public ResponseEntity<List<BookDTO>> searchBook(@PathVariable String keyword) {\r\n        return ResponseEntity.ok(bookService.searchBook(keyword));\r\n    }\r\n\r\n    @GetMapping(\"/category/{id}\")\r\n    public ResponseEntity<List<BookDTO>> getBookByCategory(@PathVariable Long id) {\r\n        return ResponseEntity.ok(bookService.findBookByCategory(id));\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/bookmestore/controller/BookController.java b/src/main/java/com/example/bookmestore/controller/BookController.java
+--- a/src/main/java/com/example/bookmestore/controller/BookController.java	(revision cdfe1cf9ff836631aaf8cff0bb894d1ce3c22e87)
++++ b/src/main/java/com/example/bookmestore/controller/BookController.java	(date 1700776206808)
+@@ -35,9 +35,5 @@
+         return ResponseEntity.ok(bookService.searchBook(keyword));
+     }
+ 
+-    @GetMapping("/category/{id}")
+-    public ResponseEntity<List<BookDTO>> getBookByCategory(@PathVariable Long id) {
+-        return ResponseEntity.ok(bookService.findBookByCategory(id));
+-    }
+ 
+ }
+Index: src/main/java/com/example/bookmestore/models/Admin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.bookmestore.models;\r\n\r\nimport com.example.bookmestore.constant.Role;\r\nimport jakarta.persistence.DiscriminatorValue;\r\nimport jakarta.persistence.Entity;\r\n\r\n@Entity\r\n@DiscriminatorValue(\"ADMIN\")\r\npublic class Admin extends BaseAccount{\r\n    public Admin() {\r\n        super();\r\n    }\r\n\r\n    public Admin(String username, String password, String email, String phone, String address, String fullName, String avatar, String role) {\r\n        super(username, password, email, phone, address, fullName, avatar, role);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/bookmestore/models/Admin.java b/src/main/java/com/example/bookmestore/models/Admin.java
+--- a/src/main/java/com/example/bookmestore/models/Admin.java	(revision cdfe1cf9ff836631aaf8cff0bb894d1ce3c22e87)
++++ b/src/main/java/com/example/bookmestore/models/Admin.java	(date 1700776443839)
+@@ -9,9 +9,6 @@
+ public class Admin extends BaseAccount{
+     public Admin() {
+         super();
+-    }
+-
+-    public Admin(String username, String password, String email, String phone, String address, String fullName, String avatar, String role) {
+-        super(username, password, email, phone, address, fullName, avatar, role);
++        setRole(Role.ADMIN);
+     }
+ }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" project-jdk-name=\"17\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision cdfe1cf9ff836631aaf8cff0bb894d1ce3c22e87)
++++ b/.idea/misc.xml	(date 1700775352156)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="MavenProjectsManager">
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9a10c9c1-271a-477d-8854-2cf870cddc04\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/User.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Enum\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 5\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2YY7y8w4782Bg6e2SdcTk44sEDp\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"android.gradle.sync.needed\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"last_opened_file_path\": \"/Users/thihnezzy/Documents/5A STI/ComposantsLogiciels/BookMeStore\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunDashboard\">\r\n    <option name=\"configurationTypes\">\r\n      <set>\r\n        <option value=\"SpringBootApplicationConfigurationType\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"BookMeStoreApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"demo\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.example.bookmestore.BookMeStoreApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9a10c9c1-271a-477d-8854-2cf870cddc04\" name=\"Changes\" comment=\"\" />\r\n      <created>1700690911315</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1700690911315</updated>\r\n      <workItem from=\"1700690912358\" duration=\"323000\" />\r\n      <workItem from=\"1700691247377\" duration=\"2272000\" />\r\n      <workItem from=\"1700763996888\" duration=\"274000\" />\r\n      <workItem from=\"1700764279708\" duration=\"2153000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision cdfe1cf9ff836631aaf8cff0bb894d1ce3c22e87)
++++ b/.idea/workspace.xml	(date 1700776489448)
+@@ -5,7 +5,10 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="9a10c9c1-271a-477d-8854-2cf870cddc04" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/controller/BookController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/bookmestore/models/Admin.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -58,12 +61,16 @@
+     "WebServerToolWindowFactoryState": "false",
+     "android.gradle.sync.needed": "true",
+     "git-widget-placeholder": "main",
++    "ignore.virus.scanning.warn.message": "true",
+     "last_opened_file_path": "/Users/thihnezzy/Documents/5A STI/ComposantsLogiciels/BookMeStore",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+     "node.js.selected.package.tslint": "(autodetect)",
+     "nodejs_package_manager_path": "npm",
++    "project.structure.last.edited": "Project",
++    "project.structure.proportion": "0.0",
++    "project.structure.side.proportion": "0.2",
+     "settings.editor.selected.configurable": "preferences.pluginManager",
+     "vue.rearranger.settings.migration": "true"
+   }
+@@ -96,6 +103,7 @@
+       <workItem from="1700691247377" duration="2272000" />
+       <workItem from="1700763996888" duration="274000" />
+       <workItem from="1700764279708" duration="2153000" />
++      <workItem from="1700775359161" duration="1131000" />
+     </task>
+     <servers />
+   </component>
