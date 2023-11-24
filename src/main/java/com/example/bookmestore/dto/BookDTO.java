@@ -4,6 +4,8 @@ package com.example.bookmestore.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class BookDTO {
@@ -13,6 +15,6 @@ public class BookDTO {
     private Integer pageCount;
     private String publisher;
     private String condition;
-    private Number price;
-    private Number shippingFee;
+    private BigDecimal price;
+    private BigDecimal shippingFee;
 }

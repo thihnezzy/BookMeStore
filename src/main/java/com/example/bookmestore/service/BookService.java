@@ -40,7 +40,7 @@ public class BookService {
         bookDTO.setAuthor(book.getAuthor());
         bookDTO.setPageCount(book.getPageCount());
         bookDTO.setPublisher(book.getPublisher());
-        bookDTO.setCondition(book.getCondition().toString());
+//        bookDTO.setCondition(book.getCondition().toString());
         bookDTO.setPrice(book.getPrice());
         bookDTO.setShippingFee(book.getShippingFee());
         return bookDTO;

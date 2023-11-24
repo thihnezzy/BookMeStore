@@ -1,11 +1,15 @@
 package com.example.bookmestore.models;
 
+import com.example.bookmestore.constant.Role;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("USER")
 public class User extends BaseAccount {
     public User() {
         super();
     }
-
-    public User(String username, String password, String email, String phone, String address, String fullName, String avatar, String role) {
-        super(username, password, email, phone, address, fullName, avatar, role);
-    }
+    private String address;
+    // Must add
 }

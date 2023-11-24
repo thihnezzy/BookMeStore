@@ -34,10 +34,4 @@ public class BookController {
     public ResponseEntity<List<BookDTO>> searchBook(@PathVariable String keyword) {
         return ResponseEntity.ok(bookService.searchBook(keyword));
     }
-
-    @GetMapping("/category/{id}")
-    public ResponseEntity<List<BookDTO>> getBookByCategory(@PathVariable Long id) {
-        return ResponseEntity.ok(bookService.findBookByCategory(id));
-    }
-
 }
