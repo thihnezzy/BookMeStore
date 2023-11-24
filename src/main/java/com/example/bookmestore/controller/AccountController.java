@@ -22,7 +22,7 @@ public class AccountController {
     private AccountService accountService;
     @PostMapping("login")
     public ResponseEntity<BaseAccount> login(@RequestBody AccountDTO accountDTO) {
-
+        System.out.println(accountDTO);
         BaseAccount account = accountService.login(accountDTO);
         return ResponseEntity.ok(account);
     }
